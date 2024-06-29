@@ -1,0 +1,6 @@
+framework module Pods_Omega_final_univ {
+  umbrella header "Pods-Omega_final_univ-umbrella.h"
+
+  export *
+  module * { export * }
+}

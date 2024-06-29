@@ -10,8 +10,11 @@ import SwiftUI
 @main
 struct Omega_final_univApp: App {
     var body: some Scene {
+        let _ = print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.path)
+        
         WindowGroup {
             ContentView()
         }
     }
 }
+
