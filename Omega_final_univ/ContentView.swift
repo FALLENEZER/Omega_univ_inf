@@ -22,20 +22,24 @@ struct ContentView: View {
                     Text("Добро пожаловать!")
                         .font(.custom("Roboto", size: 24))
                         .padding(.top, 90)
+                        .foregroundStyle(.white)
                     Text("Выберите страну для начала работы !")
                         .font(.custom("Roboto", size: 20))
                         .padding(.top, 58)
                         .multilineTextAlignment(.center)
+                        .foregroundStyle(.white)
                     
                     Picker("Choose an option", selection: $selected_country) {
                         ForEach(country, id: \.country) { element in
                             Text("\(element.country)")
+                                .foregroundStyle(.white)
                         }
                     }
                     .pickerStyle(.wheel)
                     Text("Текущая страна: \($selected_country.wrappedValue)") //TODO
                         .font(.custom("Roboto", size: 20))
                         .padding(.bottom, 18)
+                        .foregroundStyle(.white)
                     Utils().Custom_buttons(button_naming: "Отзывы", where_to_go: Feedback_country(selected_country: $selected_country))
                     Utils().Custom_buttons(button_naming: "Выбрать", where_to_go: Choosing_univer(selected_country: $selected_country))
                         .padding(.top)

@@ -22,8 +22,7 @@ struct Choosing_univer: View {
                     .ignoresSafeArea(edges: .vertical)
                 
                 VStack {
-                    Text("\(selected_country)")
-                        .font(.custom("Roboto", size: 20))
+Text("")
                     
                     VStack {
                         List(univer.filter({ $0.country == selected_country }), id: \.name) { element in
@@ -40,7 +39,12 @@ struct Choosing_univer: View {
                     Button(action: {
                         dismiss()
                     }) {
-                        Image("Back_custom_btn")
+                        HStack {
+                            Image("Back_custom_btn")
+                            Text("\(selected_country)")
+                                .font(.custom("Roboto", size: 20))
+                                .foregroundStyle(.white)
+                        }
                     }
                 }
             }
