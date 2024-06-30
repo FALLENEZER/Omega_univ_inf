@@ -21,27 +21,34 @@ struct Send_feedback: View {
             LinearGradient(gradient: Gradient(colors: [Color("Pink_main_view"), Color.blue]), startPoint: .trailing, endPoint: .bottom)
                 .ignoresSafeArea(edges: .vertical)
             VStack {
-                Text("\(selected_un)")
+                Text("Оставить отзыв")
                     .font(.custom("Roboto", size: 20))
                     .foregroundStyle(.white)
+                    .padding(.bottom, 30)
                 
-                ZStack {
-                    RoundedRectangle(cornerRadius: 50)
-                        .foregroundStyle(.white)
-                        .frame(width: 295, height: 303)
-                    TextField("Введите отзыв", text: $feedback)
-                        .padding(.leading, 66)
-                }
-                
-                Picker("", selection: $rate) {
-                    ForEach(1..<6) { element in
-                        Text("\(element)")
+                RoundedRectangle(cornerRadius: 50)
+                    .foregroundStyle(.white)
+                    .frame(width: 295, height: 303)
+                    .overlay(alignment: .topLeading) {
+                        TextField("Введите отзыв", text: $feedback, axis: .vertical)
+                            .padding(.leading, 30)
+                            .padding(.top, 30)
+                            .padding(.trailing, 30)
                     }
-                }
-                .pickerStyle(.segmented)
+                
+                
+                Segmented_picker(rate: $rate, options: [1, 2, 3, 4, 5])
+                
+                .padding(.vertical, 40)
+                
                 Button(action: { add_feedback(feedback, rate) }) {
                     Text("Отправить")
                 }
+                .frame(width: 264, height: 48)
+                .font(.custom("Roboto", size: 16))
+                .background(Color("Button_color"))
+                .clipShape(RoundedRectangle(cornerRadius: 50))
+                .foregroundStyle(.white)
             }
             .navigationBarBackButtonHidden(true)
         }
@@ -54,6 +61,32 @@ struct Send_feedback: View {
             try! realm.write {
                 university.feedback.append(feedback)
                 university.people_rate.append("\(rate)")
+            }
+        }
+    }
+}
+
+struct Segmented_picker: View {
+    @Binding var rate: Int
+    let options: [Int]
+    
+    var body: some View {
+        HStack(spacing: 10) {
+            ForEach(options, id: \.self) { option in
+                VStack {
+                    Button {
+                        rate = option
+                    } label: {
+                        ZStack() {
+                            Circle()
+                                .foregroundStyle(rate == option ? .blue : .white)
+                                .frame(width: 60)
+                            Text("\(option)")
+                                .foregroundStyle(rate == option ? .black : .gray)
+                                .font(.custom("Roboto", size: 20))
+                        }
+                    }
+                }
             }
         }
     }
