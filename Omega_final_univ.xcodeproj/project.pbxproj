@@ -27,6 +27,7 @@
 		237890DC2C2DFACA00E4F4E2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		237890DE2C2DFACC00E4F4E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		237890E12C2DFACC00E4F4E2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		239A47002C3BD5E8002EF305 /* Omega-final-univ-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Omega-final-univ-Info.plist"; sourceTree = SOURCE_ROOT; };
 		23EB68852C2E767D00FF51F4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		23EB68882C2E7D6F00FF51F4 /* Univer_inf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Univer_inf.swift; sourceTree = "<group>"; };
 		23EB688A2C2E8BD100FF51F4 /* Country_inf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country_inf.swift; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 		237890D92C2DFACA00E4F4E2 /* Omega_final_univ */ = {
 			isa = PBXGroup;
 			children = (
+				239A47002C3BD5E8002EF305 /* Omega-final-univ-Info.plist */,
 				23EB68872C2E7D3400FF51F4 /* Model */,
 				237890DA2C2DFACA00E4F4E2 /* Omega_final_univApp.swift */,
 				237890DC2C2DFACA00E4F4E2 /* ContentView.swift */,
@@ -381,6 +383,7 @@
 				DEVELOPMENT_TEAM = 22GMTQ4LDY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Omega-final-univ-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -411,6 +414,7 @@
 				DEVELOPMENT_TEAM = 22GMTQ4LDY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Omega-final-univ-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

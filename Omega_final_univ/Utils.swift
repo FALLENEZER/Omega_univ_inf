@@ -1,11 +1,3 @@
-//
-//  Utils.swift
-//  Omega_final_univ
-//
-//  Created by Даниил Игумнов on 28.06.2024.
-//
-
-
 import Foundation
 import SwiftUI
 
@@ -31,5 +23,31 @@ struct ShowRow: View {
             Text(univer.descr)
         }
     }
+}
 
+struct Univ: Codable {
+    let name: String
+    let web_pages: [String]
+    let country: String
+}
+
+class Api {
+    func getUniv(url: String) async throws -> [Univ] {
+        guard let url = URL(string: "http://universities.hipolabs.com/search?country=\(url)") else { throw URLError(.badURL) }
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let univs = try JSONDecoder().decode([Univ].self, from: data)
+        return univs
+    }
+}
+
+enum Countries_list: String {
+    case Russia = "Russia"
+    case France = "France"
+    case USA = "USA"
+}
+
+enum GHError: Error {
+    case invalidURL
+    case invalidResponse
+    case invalidData
 }

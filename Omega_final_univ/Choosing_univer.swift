@@ -22,7 +22,7 @@ struct Choosing_univer: View {
                     .ignoresSafeArea(edges: .vertical)
                 
                 VStack {
-Text("")
+                    Text("")
                     
                     VStack {
                         List(univer.filter({ $0.country == selected_country }), id: \.name) { element in

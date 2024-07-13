@@ -9,26 +9,49 @@ import SwiftUI
 import RealmSwift
 
 struct Feedback_country: View {
-    @Binding var selected_country: String
+    @Binding var selected_country: Countries_list
     @Environment(\.dismiss) var dismiss
-    @ObservedResults(Univer_inf.self) var univer
-    @ObservedResults(Country_inf.self) var country
+    //@ObservedResults(Univer_inf.self) var univer
+    //@ObservedResults(Country_inf.self) var country
     @State var is_active = false
+    @State var vus: [Univ]
 
     
     var body: some View {
         ZStack {
+            /*List(univers) { univ in
+                Text("\(univ.alpha_two_code)")
+            }
+            .onAppear() {
+                Api().getUniv { (univers) in
+                    self.univers = univers ?? []
+                }
+            }
+            .navigationTitle("Univers")
+             */
             LinearGradient(gradient: Gradient(colors: [Color("Pink_main_view"), Color.blue]), startPoint: .trailing, endPoint: .bottom)
                 .ignoresSafeArea(edges: .vertical)
             VStack {
                 Text("Отзывы")
                     .font(.custom("Roboto", size: 20))
                 
-                ForEach(univer.filter({ $0.country == selected_country }), id: \.id) { element in
-                    ForEach(0..<element.feedback.count, id: \.self) { i in
+                ForEach(vus, id: \.name) { element in
+                    /*ForEach(0..<element.feedback.count, id: \.self) { i in
                         cell(element, order: i, is_active)
+                    }*/
+                    Text("\(element.country)")
+                    Text("\(element.name)")
+                    Text("1")
+                
+                }
+                .task {
+                    do {
+                        vus = try await Api().getUniv(url: "France")
+                    } catch {
+                        print("error")
                     }
                 }
+
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {
@@ -80,8 +103,10 @@ struct Feedback_country: View {
     }
 }
 
-#Preview {
-    @State var country = "Беларусь"
+/*#Preview {
+    @State var country = "USA"
 
-    return Feedback_country(selected_country: $country)
+    return Feedback_country(selected_country: $country, vus: Univ)
 }
+*/
+

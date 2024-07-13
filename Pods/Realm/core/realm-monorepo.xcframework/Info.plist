@@ -12,8 +12,10 @@
 			<key>LibraryPath</key>
 			<string>librealm-monorepo.a</string>
 			<key>SupportedArchitectures</key>
-			<array><string>x86_64</string>
-<string>arm64</string></array>
+			<array>
+				<string>x86_64</string>
+				<string>arm64</string>
+			</array>
 			<key>SupportedPlatform</key>
 			<string>macos</string>
 		</dict>
@@ -25,7 +27,9 @@
 			<key>LibraryPath</key>
 			<string>librealm-monorepo.a</string>
 			<key>SupportedArchitectures</key>
-			<array><string>arm64</string></array>
+			<array>
+				<string>arm64</string>
+			</array>
 			<key>SupportedPlatform</key>
 			<string>ios</string>
 		</dict>
@@ -37,8 +41,10 @@
 			<key>LibraryPath</key>
 			<string>librealm-monorepo.a</string>
 			<key>SupportedArchitectures</key>
-			<array><string>arm64</string>
-<string>x86_64</string></array>
+			<array>
+				<string>arm64</string>
+				<string>x86_64</string>
+			</array>
 			<key>SupportedPlatform</key>
 			<string>ios</string>
 			<key>SupportedPlatformVariant</key>
@@ -52,8 +58,10 @@
 			<key>LibraryPath</key>
 			<string>librealm-monorepo.a</string>
 			<key>SupportedArchitectures</key>
-			<array><string>arm64</string>
-<string>x86_64</string></array>
+			<array>
+				<string>arm64</string>
+				<string>x86_64</string>
+			</array>
 			<key>SupportedPlatform</key>
 			<string>ios</string>
 			<key>SupportedPlatformVariant</key>
@@ -67,9 +75,11 @@
 			<key>LibraryPath</key>
 			<string>librealm-monorepo.a</string>
 			<key>SupportedArchitectures</key>
-			<array><string>arm64</string>
-<string>armv7k</string>
-<string>arm64_32</string></array>
+			<array>
+				<string>arm64</string>
+				<string>armv7k</string>
+				<string>arm64_32</string>
+			</array>
 			<key>SupportedPlatform</key>
 			<string>watchos</string>
 		</dict>
@@ -81,9 +91,11 @@
 			<key>LibraryPath</key>
 			<string>librealm-monorepo.a</string>
 			<key>SupportedArchitectures</key>
-			<array><string>arm64</string>
-<string>i386</string>
-<string>x86_64</string></array>
+			<array>
+				<string>arm64</string>
+				<string>i386</string>
+				<string>x86_64</string>
+			</array>
 			<key>SupportedPlatform</key>
 			<string>watchos</string>
 			<key>SupportedPlatformVariant</key>
@@ -97,7 +109,9 @@
 			<key>LibraryPath</key>
 			<string>librealm-monorepo.a</string>
 			<key>SupportedArchitectures</key>
-			<array><string>arm64</string></array>
+			<array>
+				<string>arm64</string>
+			</array>
 			<key>SupportedPlatform</key>
 			<string>tvos</string>
 		</dict>
@@ -109,8 +123,10 @@
 			<key>LibraryPath</key>
 			<string>librealm-monorepo.a</string>
 			<key>SupportedArchitectures</key>
-			<array><string>arm64</string>
-<string>x86_64</string></array>
+			<array>
+				<string>arm64</string>
+				<string>x86_64</string>
+			</array>
 			<key>SupportedPlatform</key>
 			<string>tvos</string>
 			<key>SupportedPlatformVariant</key>
@@ -124,7 +140,9 @@
 			<key>LibraryPath</key>
 			<string>librealm-monorepo.a</string>
 			<key>SupportedArchitectures</key>
-			<array><string>arm64</string></array>
+			<array>
+				<string>arm64</string>
+			</array>
 			<key>SupportedPlatform</key>
 			<string>xros</string>
 		</dict>
@@ -136,8 +154,10 @@
 			<key>LibraryPath</key>
 			<string>librealm-monorepo.a</string>
 			<key>SupportedArchitectures</key>
-			<array><string>arm64</string>
-<string>x86_64</string></array>
+			<array>
+				<string>arm64</string>
+				<string>x86_64</string>
+			</array>
 			<key>SupportedPlatform</key>
 			<string>xros</string>
 			<key>SupportedPlatformVariant</key>
@@ -148,5 +168,22 @@
 	<string>XFWK</string>
 	<key>XCFrameworkFormatVersion</key>
 	<string>1.0</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>universities.hipolabs.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.0</string>
+			</dict>
+		</dict>
+	</dict>
 </dict>
 </plist>
