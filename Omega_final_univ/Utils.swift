@@ -32,27 +32,25 @@ struct Univ: Decodable, Identifiable {
     let name: String
 }
 
-
-
-
-/*struct Univ: Decodable, Identifiable {
-    var id = UUID()
-    let web_pages: [UnivSpecInf]
-}*/
-
 class Api {
-    func getUniv(url: String) async throws -> [Univ] {
-        guard let url = URL(string: "http://universities.hipolabs.com/search?country=\(url)") else { throw URLError(.badURL) }
-        let (data, _) = try await URLSession.shared.data(from: url)
-        let univs = try JSONDecoder().decode([Univ].self, from: data)
-        return univs
+    func getUniv(name: String, completion: @escaping ([Univ]) -> ()){
+        guard let url = URL(string: "http://universities.hipolabs.com/search?country=\(String(describing: name))") else { return }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            print(response ?? "hz")
+            print(error!)
+            
+            let all = try! JSONDecoder().decode([Univ].self, from: data!)
+            DispatchQueue.main.async {
+                completion(all)
+            }
+        } .resume()
     }
 }
 
 enum Countries_list: String {
-    case Russia = "Denmark"
+    case Denmark = "Denmark"
     case France = "France"
-    case USA = "Kazakhstan"
+    case Kazakhstan = "Kazakhstan"
 }
 
 

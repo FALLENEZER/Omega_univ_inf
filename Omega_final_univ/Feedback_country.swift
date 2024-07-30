@@ -14,7 +14,7 @@ struct Feedback_country: View {
     //@ObservedResults(Univer_inf.self) var univer
     //@ObservedResults(Country_inf.self) var country
     @State var is_active = false
-    @State var vus: [Univ]
+    @State var vus: [Univ] = []
 
     
     var body: some View {
@@ -39,16 +39,13 @@ struct Feedback_country: View {
                     /*ForEach(0..<element.feedback.count, id: \.self) { i in
                         cell(element, order: i, is_active)
                     }*/
-                    Text("\(element.country)")
                     Text("\(element.name)")
                     Text("1")
                 
                 }
-                .task {
-                    do {
-                        vus = try await Api().getUniv(url: "France")
-                    } catch {
-                        print("error")
+                .onAppear() {
+                    Api().getUniv(name: "France") { (vus) in
+                        self.vus = vus
                     }
                 }
 

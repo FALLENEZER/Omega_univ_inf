@@ -9,11 +9,11 @@ import SwiftUI
 import RealmSwift
 
 struct ContentView: View {
-    @State private var selected_country = Countries_list.Russia
+    @State private var selected_country = Countries_list.Kazakhstan
     //@ObservedResults(Univer_inf.self) var univer
     //@ObservedResults(Country_inf.self) var country
     @State var univers: [Univ] = []
-    let variants = [Countries_list.Russia, Countries_list.France, Countries_list.USA]
+    let variants = [Countries_list.Kazakhstan, Countries_list.France, Countries_list.Denmark]
     
     var body: some View {
         NavigationView {
@@ -42,7 +42,7 @@ struct ContentView: View {
                         .font(.custom("Roboto", size: 20))
                         .padding(.bottom, 18)
                         .foregroundStyle(.white)
-                    Utils().Custom_buttons(button_naming: "Отзывы", where_to_go: Feedback_country(selected_country: $selected_country, vus: []))
+                    Utils().Custom_buttons(button_naming: "Отзывы", where_to_go: Feedback_country(selected_country: $selected_country))
                     //Utils().Custom_buttons(button_naming: "Выбрать", where_to_go: Choosing_univer(selected_country: $selected_country))
                         .padding(.top)
                 }
