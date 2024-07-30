@@ -25,11 +25,20 @@ struct ShowRow: View {
     }
 }
 
-struct Univ: Codable {
-    let name: String
+struct Univ: Decodable, Identifiable {
+    var id = UUID()
     let web_pages: [String]
     let country: String
+    let name: String
 }
+
+
+
+
+/*struct Univ: Decodable, Identifiable {
+    var id = UUID()
+    let web_pages: [UnivSpecInf]
+}*/
 
 class Api {
     func getUniv(url: String) async throws -> [Univ] {
@@ -41,13 +50,9 @@ class Api {
 }
 
 enum Countries_list: String {
-    case Russia = "Russia"
+    case Russia = "Denmark"
     case France = "France"
-    case USA = "USA"
+    case USA = "Kazakhstan"
 }
 
-enum GHError: Error {
-    case invalidURL
-    case invalidResponse
-    case invalidData
-}
+

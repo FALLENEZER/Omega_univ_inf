@@ -35,7 +35,7 @@ struct Feedback_country: View {
                 Text("Отзывы")
                     .font(.custom("Roboto", size: 20))
                 
-                ForEach(vus, id: \.name) { element in
+                ForEach(vus) { element in
                     /*ForEach(0..<element.feedback.count, id: \.self) { i in
                         cell(element, order: i, is_active)
                     }*/
