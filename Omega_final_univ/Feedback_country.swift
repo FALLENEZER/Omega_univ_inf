@@ -4,65 +4,63 @@
 //
 //  Created by Даниил Игумнов on 18.06.2024.
 //
-
 import SwiftUI
 import RealmSwift
 
+
 struct Feedback_country: View {
+    
     @Binding var selected_country: Countries_list
     @Environment(\.dismiss) var dismiss
-    //@ObservedResults(Univer_inf.self) var univer
-    //@ObservedResults(Country_inf.self) var country
+    @ObservedResults(UniverInfo.self) var univer
     @State var is_active = false
-    @State var vus: [Univ] = []
-
+    @State var combinedData: [CombinedUniv] = []
     
     var body: some View {
         ZStack {
-            /*List(univers) { univ in
-                Text("\(univ.alpha_two_code)")
-            }
-            .onAppear() {
-                Api().getUniv { (univers) in
-                    self.univers = univers ?? []
-                }
-            }
-            .navigationTitle("Univers")
-             */
             LinearGradient(gradient: Gradient(colors: [Color("Pink_main_view"), Color.blue]), startPoint: .trailing, endPoint: .bottom)
                 .ignoresSafeArea(edges: .vertical)
-            VStack {
+            ScrollView {
                 Text("Отзывы")
                     .font(.custom("Roboto", size: 20))
                 
-                ForEach(vus) { element in
-                    /*ForEach(0..<element.feedback.count, id: \.self) { i in
-                        cell(element, order: i, is_active)
-                    }*/
-                    Text("\(element.name)")
-                    Text("1")
-                
+                ForEach(combinedData) { element in
+                    cell(element, is_active)
                 }
-                .onAppear() {
-                    Api().getUniv(name: "France") { (vus) in
-                        self.vus = vus
-                    }
-                }
-
             }
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem (placement: .topBarLeading) {
-                    HStack {
-                        Button(action: {
-                            dismiss()
-                        }) {
-                            HStack {
-                                Image("Back_custom_btn")
-                                Text("\(selected_country)")
-                                    .font(.custom("Roboto", size: 20))
-                                    .foregroundStyle(.white)
-                            }
+        }
+        .onAppear() {
+            // Настройка внешнего вида navigation bar
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            
+            Api().getUniv(name: selected_country.rawValue) { (vus) in
+                let combined = vus.map { apiUniv in
+                    CombinedUniv(
+                        id: apiUniv.id,
+                        apiData: apiUniv,
+                        dbData: univer.first(where: { $0.name == apiUniv.name })
+                    )
+                }
+                self.combinedData = combined
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem (placement: .topBarLeading) {
+                HStack {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        HStack {
+                            Image("Back_custom_btn")
+                            Text("\(selected_country.rawValue)")
+                                .font(.custom("Roboto", size: 20))
+                                .foregroundStyle(.white)
                         }
                     }
                 }
@@ -70,11 +68,10 @@ struct Feedback_country: View {
         }
     }
     
-    func cell(_ element: Univer_inf, order: Int, _ is_active: Bool) -> some View {
-        
+    func cell(_ element: CombinedUniv, _ is_active: Bool) -> some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("\(element.name)")
+                Text("\(element.apiData.name)")
                     .padding(.top, 10)
                 Spacer()
                 Button(action: { self.is_active.toggle() }) {
@@ -83,27 +80,34 @@ struct Feedback_country: View {
                 }
                 .padding(.trailing, 20)
             }
-            Text("Оценка: \(element.people_rate[order])")
-                .padding(.vertical, 20)
-            if is_active {
-                Text("\(element.feedback[order])")
-                    .padding(.bottom, 10)
+            // Вывод данных из базы данных, если они существуют
+            
+            if let rate = element.dbData?.people_rate, !rate.isEmpty, let descr = element.dbData?.feedback, !descr.isEmpty {
+                ForEach(Array(zip(rate, descr)), id: \.self.0) { (number, words) in
+                    VStack {
+                        Text("Оценка: \(number)")
+                            .padding()
+                        Text("Отзыв: \(words)")
+                            .padding()
+                    }
+                }
+            } else {
+                Text("Оценки пока нету")
+                    .padding(.vertical, 20)
             }
+            
         }
         .frame(width: 336, alignment: .leading)
-        .frame(maxHeight: 136)
+        //.frame(maxHeight: 136)
         .padding(.leading, 25)
         .font(.custom("Roboto", size: 20))
         .background(Color("Cell_color"))
         .clipShape(Rectangle())
         .foregroundStyle(.primary)
     }
+    
+
+
 }
 
-/*#Preview {
-    @State var country = "USA"
-
-    return Feedback_country(selected_country: $country, vus: Univ)
-}
-*/
 

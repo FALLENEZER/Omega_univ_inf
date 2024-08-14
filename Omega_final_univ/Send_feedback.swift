@@ -9,12 +9,12 @@ import SwiftUI
 import RealmSwift
 
 struct Send_feedback: View {
+    @StateObject private var viewModel = UniversityViewModel()
     @State var selected_un: String
     @State var feedback: String = ""
     @State var rate: Int = 5
     @Environment(\.dismiss) var dismiss
-    @ObservedResults(Univer_inf.self) var univer
-    @ObservedResults(Country_inf.self) var country
+    @ObservedResults(UniverInfo.self) var univer
     
     var body: some View {
         ZStack {
@@ -57,7 +57,7 @@ struct Send_feedback: View {
     func add_feedback(_ feedback: String, _ rate: Int) {
         let realm = try! Realm()
         
-        if let university = realm.objects(Univer_inf.self).first(where: {$0.name == selected_un}) {
+        if let university = realm.objects(UniverInfo.self).first(where: {$0.name == selected_un}) {
             try! realm.write {
                 university.feedback.append(feedback)
                 university.people_rate.append("\(rate)")
@@ -92,7 +92,4 @@ struct Segmented_picker: View {
     }
 }
 
-#Preview {
-    var selected_un = "МГУ"
-    return Send_feedback(selected_un: selected_un)
-}
+

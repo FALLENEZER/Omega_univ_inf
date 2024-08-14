@@ -8,12 +8,13 @@
 import Foundation
 import RealmSwift
 
-class Univer_inf: Object, Identifiable {
+class UniverInfo: Object, Identifiable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var country = ""
     @Persisted var name = ""
     @Persisted var rate = ""
     @Persisted var descr = ""
+    //@Persisted var is_active = false
     @Persisted var feedback = RealmSwift.List<String>()
     @Persisted var people_rate = RealmSwift.List<String>()
     
